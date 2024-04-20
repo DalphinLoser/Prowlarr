@@ -65,7 +65,8 @@ jobs:
 
       - name: Build and Push Image
         run: |
-          IMAGE_NAME="ghcr.io/${{ github.repository,, }}:${{ env.IMAGE_VERSION }}"
+          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_NAME="ghcr.io/${REPO_LOWER}:${{ env.IMAGE_VERSION }}"
           docker buildx build \
             --platform linux/amd64 \
             --tag $IMAGE_NAME \
