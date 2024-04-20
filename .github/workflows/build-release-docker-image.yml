@@ -25,6 +25,7 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v1
         with:
@@ -35,7 +36,7 @@ jobs:
       - name: Fetch and Parse Release Data
         id: release_info
         run: |
-          release_info=$(gh release view --repo ${{ github.repository_owner }}/${{ vars.RELEASE_REPO }} --json apiUrl,assets,author,body,createdAt,id,isDraft,isPrerelease,name,publishedAt,tagName,tarballUrl,targetCommitish,uploadUrl,url,zipballUrl | jq '.')
+          release_info=$(gh release view --repo ${{ github.repository }} --json apiUrl,assets,author,body,createdAt,id,isDraft,isPrerelease,name,publishedAt,tagName,tarballUrl,targetCommitish,uploadUrl,url,zipballUrl | jq '.')
           echo "API_URL=$(echo "$release_info" | jq -r '.apiUrl')" >> $GITHUB_ENV
           echo "AUTHOR=$(echo "$release_info" | jq -r '.author.login')" >> $GITHUB_ENV
           echo "BODY=$(echo "$release_info" | jq -r '.body')" >> $GITHUB_ENV
@@ -55,7 +56,7 @@ jobs:
           echo "ZIPBALL_URL=$(echo "$release_info" | jq -r '.zipballUrl')" >> $GITHUB_ENV
       
           # Additional variables for asset info (ensure to fetch asset info correctly)
-          asset_info=$(gh release view --repo ${{ github.repository_owner }}/${{ vars.RELEASE_REPO }} --json assets | jq '.assets[]')
+          asset_info=$(gh release view --repo ${{ github.repository }} --json assets | jq '.assets[]')
           echo "ASSET_NAME=$(echo "$asset_info" | jq -r '.name')" >> $GITHUB_ENV
           echo "ASSET_URL=$(echo "$asset_info" | jq -r '.url')" >> $GITHUB_ENV
           echo "ASSET_SIZE=$(echo "$asset_info" | jq -r '.size')" >> $GITHUB_ENV
