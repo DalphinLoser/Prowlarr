@@ -31,7 +31,8 @@ RUN \
         -H "Accept: application/octet-stream" \
         ${ZIP_DOWNLOAD_LINK}
 RUN \    
-    unzip /tmp/prowlarr.zip -d /app/prowlarr/bin
+    unzip /tmp/prowlarr.zip -d /app/prowlarr/bin && \
+    chmod 755 /app/prowlarr/bin/Prowlarr
 RUN \
     echo -e "UpdateMethod=docker\nBranch=${BRANCH}\nPackageVersion=${VERSION}\nPackageAuthor=[linuxserver.io](https://www.linuxserver.io/), ${MAINTAINER}" > /app/prowlarr/package_info
 RUN \
