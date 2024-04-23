@@ -6,7 +6,7 @@ FROM ghcr.io/linuxserver/baseimage-alpine:3.19
 ARG VERSION
 ARG ZIP_DOWNLOAD_LINK
 LABEL maintainer="dalphinloser"
-ARG BRANCH
+ARG BRANCH="develop"
 
 # environment settings
 ENV XDG_CONFIG_HOME="/config/xdg"
