@@ -42,6 +42,17 @@ RUN \
         /tmp/* \
       /var/tmp/*
 
+# Fetch the `root` directory and copy contents to the image root
+RUN mkdir -p /app/temp_root && \
+    git init /app/temp_root && \
+    cd /app/temp_root && \
+    git remote add -f origin https://github.com/linuxserver/docker-prowlarr.git && \
+    git config core.sparseCheckout true && \
+    echo "root" > .git/info/sparse-checkout && \
+    git pull origin main && \
+    cp -rn /app/temp_root/root/. / && \
+    rm -rf /app/temp_root
+
 # Expose port and volume
 EXPOSE 9696
 VOLUME /config
