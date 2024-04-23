@@ -79,5 +79,4 @@ jobs:
             --build-arg GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} \
             --build-arg VERSION=${{ env.IMAGE_VERSION }} \
             --build-arg ZIP_DOWNLOAD_LINK=${{ env.ASSET_URL }} \
-            --build-arg BRANCH=${{ env.TARGET_COMMITISH }} \
-            .
+            --build-arg BRANCH=${{ env.TARGET_COMMITISH }}
