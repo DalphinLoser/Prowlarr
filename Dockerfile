@@ -34,7 +34,7 @@ RUN \
     unzip /tmp/prowlarr.zip -d /app/prowlarr/bin && \
     chmod 755 /app/prowlarr/bin/Prowlarr || true
 RUN \
-    echo -e "UpdateMethod=docker\nBranch=${BRANCH}\nPackageVersion=${VERSION}\nPackageAuthor=[linuxserver.io](https://www.linuxserver.io/), ${MAINTAINER}" > /app/prowlarr/package_info
+    echo -e "UpdateMethod=docker\nBranch=${BRANCH}\nPackageVersion=${VERSION}\nPackageAuthor=[dalphinloser](https://github.com/DalphinLoser)" > /app/prowlarr/package_info
 RUN \
     echo "**** cleanup ****" && \
     rm -rf \
